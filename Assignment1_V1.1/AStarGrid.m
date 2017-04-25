@@ -55,15 +55,15 @@ map(dest_node)  = 6;
 parent = zeros(nrows,ncols);
 
 % 
-[X, Y] = meshgrid (1:ncols, 1:nrows);
+%[X, Y] = meshgrid (1:ncols, 1:nrows);
 
-xd = dest_coords(1);
-yd = dest_coords(2);
+%xd = dest_coords(1);
+%yd = dest_coords(2);
 
 % Evaluate Heuristic function, H, for each grid cell
 % Manhattan distance
-H = abs(X - xd) + abs(Y - yd);
-H = H';
+%H = abs(X - xd) + abs(Y - yd);
+%H = H';
 % Initialize cost arrays
 f = Inf(nrows,ncols);
 g = Inf(nrows,ncols);
@@ -121,17 +121,17 @@ while true
     if n4(2)>0 & input_map(n4(1),n4(2))~=1
         nei=[nei sub2ind(size(map),n4(1),n4(2))];
     end
-    if n2(1)<11 & input_map(n2(1),n2(2))~=1
+    if n2(1)<182 & input_map(n2(1),n2(2))~=1
         nei=[nei sub2ind(size(map),n2(1),n2(2))];
     end
-    if n3(2)<11 &  input_map(n3(1),n3(2))~=1
+    if n3(2)<182 &  input_map(n3(1),n3(2))~=1
         nei=[nei sub2ind(size(map),n3(1),n3(2))];
     end
     for i=nei
         
         if(g(i)>g(current)+1)
            g(i)=g(current)+1;
-           f(i)=g(i)+H(i);
+           f(i)=g(i);
            map(i)=4;
            parent(i)=current;
         end
@@ -155,12 +155,6 @@ else
     end
 
     % Snippet of code used to visualize the map and the path
-    for k = 2:length(route) - 1        
-        map(route(k)) = 7;
-        pause(0.1);
-        image(1.5, 1.5, map);
-        grid on;
-        axis image;
-    end
+   
 end
 end
